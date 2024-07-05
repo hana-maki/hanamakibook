@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hanamaki Book Showcase</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #1a365d, #2a4365, #000000);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .book {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .book img {
+      max-width: 200px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s;
+    }
+    .book img:hover {
+      opacity: 0.8;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .button.active {
+      background-color: #3182ce;
+      color: white;
+    }
+    .button.inactive {
+      background-color: #4a5568;
+      color: #cbd5e0;
+    }
+    .button.inactive:hover {
+      background-color: #2d3748;
+    }
+  </style>
+</head>
+<body>
+  <div class="book">
+    <h1 id="book-title">根の国モンスター辞典</h1>
+    <a id="book-link" href="https://hana-maki.github.io/hanamakimonster/" target="_blank">
+      <img id="book-image" src="hyousi.png" alt="根の国モンスター辞典">
+    </a>
+  </div>
+  <div class="buttons">
+    <button class="button active" onclick="selectBook(1)">本 1</button>
+    <button class="button inactive" onclick="selectBook(2)">本 2</button>
+    <button class="button inactive" onclick="selectBook(3)">本 3</button>
+    <button class="button inactive" onclick="selectBook(4)">本 4</button>
+    <button class="button inactive" onclick="selectBook(5)">本 5</button>
+  </div>
+  <script>
+    const books = [
+      { id: 1, title: "根の国モンスター辞典", link: "https://hana-maki.github.io/hanamakimonster/", image: "hyousi.png" },
+      { id: 2, title: "魔法の本", link: "https://example.com/book2", image: "book2.png" },
+      { id: 3, title: "冒険者ガイド", link: "https://example.com/book3", image: "book3.png" },
+      { id: 4, title: "幻想生物図鑑", link: "https://example.com/book4", image: "book4.png" },
+      { id: 5, title: "古代遺跡の秘密", link: "https://example.com/book5", image: "book5.png" },
+    ];
+
+    function selectBook(id) {
+      const selectedBook = books.find(book => book.id === id);
+      document.getElementById('book-title').textContent = selectedBook.title;
+      document.getElementById('book-link').href = selectedBook.link;
+      document.getElementById('book-image').src = selectedBook.image;
+      document.querySelectorAll('.button').forEach(button => {
+        button.classList.remove('active');
+        button.classList.add('inactive');
+      });
+      document.querySelector(`.button:nth-child(${id})`).classList.add('active');
+      document.querySelector(`.button:nth-child(${id})`).classList.remove('inactive');
+    }
+  </script>
+</body>
+</html>
