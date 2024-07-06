@@ -15,10 +15,17 @@
       min-height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
+      padding: 20px;
+      box-sizing: border-box;
     }
     .book {
       text-align: center;
       margin-bottom: 20px;
+      max-width: 100%;
+    }
+    .book h1 {
+      font-size: 24px;
+      margin-bottom: 15px;
     }
     .book img {
       max-width: 100%;
@@ -26,13 +33,18 @@
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       transition: opacity 0.3s;
+      max-height: 50vh;
+      object-fit: contain;
     }
     .book img:hover {
       opacity: 0.8;
     }
     .buttons {
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
+      margin-top: 20px;
     }
     .button {
       padding: 10px 20px;
@@ -40,6 +52,7 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s;
+      font-size: 14px;
     }
     .button.active {
       background-color: #3182ce;
@@ -52,13 +65,46 @@
     .button.inactive:hover {
       background-color: #2d3748;
     }
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .book h1 {
+        font-size: 20px;
+      }
+
+      .book img {
+        max-height: 40vh;
+      }
+
+      .button {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .book h1 {
+        font-size: 18px;
+      }
+
+      .book img {
+        max-height: 30vh;
+      }
+
+      .button {
+        padding: 6px 12px;
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="book">
     <h1 id="book-title">根の国モンスター辞典</h1>
     <a id="book-link" href="https://hana-maki.github.io/hanamakimonster/" target="_blank">
-      <img id="book-image" src="hyousi.png" alt="根の国モンスター辞典">
+      <img id="book-image" src="hyousi.png" alt="根の国モンスター辞典" loading="lazy">
     </a>
   </div>
   <div class="buttons">
@@ -76,7 +122,6 @@
       { id: 4, title: "幻想生物図鑑", link: "https://example.com/book4", image: "book4.png" },
       { id: 5, title: "古代遺跡の秘密", link: "https://example.com/book5", image: "book5.png" },
     ];
-
     function selectBook(id) {
       const selectedBook = books.find(book => book.id === id);
       document.getElementById('book-title').textContent = selectedBook.title;
